@@ -1,9 +1,14 @@
+import os
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
+from google.appengine.ext.webapp import template
+
 class MainPage(webapp.RequestHandler):
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.out.write('html/main.html')
+	"""default get handler for the Main Page"""
+	def get(self):
+		path = os.path.join(os.path.abspath(__file__),'../html','main.html')
+		self.response.out.write(template.render(path,{}))
+		
 
 application = webapp.WSGIApplication(
                                      [('/', MainPage)],
