@@ -1,7 +1,11 @@
 import os
+import sys
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
+sys.path.append('./app')
+from MorePhysics import MorePhysics
+from Game import Game
 
 class MainPage(webapp.RequestHandler):
 	"""default get handler for the Main Page"""
@@ -11,7 +15,9 @@ class MainPage(webapp.RequestHandler):
 		
 
 application = webapp.WSGIApplication(
-                                     [('/', MainPage)],
+                                     [('/', MainPage), 
+									  ('/More',MorePhysics), 
+									  ('/Game',Game)],
                                      debug=True)
 
 def main():
